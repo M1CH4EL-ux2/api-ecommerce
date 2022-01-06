@@ -21,7 +21,8 @@ const Schema = new mongoose.Schema({
     },
     username: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User"
+        ref: "User",
+        required: true
     }
 });
 
