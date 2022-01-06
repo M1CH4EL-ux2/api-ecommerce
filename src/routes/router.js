@@ -10,8 +10,8 @@ routes.get('/', (req, res) => {
 })
 
 routes.post('/users', UserController.createUser)
-routes.get('/users')
-routes.get('/users/:user_id')
+routes.get('/users', UserController.getUser)
+routes.get('/users/:user_id', UserController.getUserById)
 
 routes.post('/login')
 
