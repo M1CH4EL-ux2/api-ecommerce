@@ -35,4 +35,4 @@ const Schema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('Card', Schema);
+module.exports = mongoose.model('Cart', Schema);

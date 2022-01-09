@@ -8,18 +8,22 @@ const ProductController = {
         try {
             const data = {username: user_id, ...bodyData}
 
-            console.log(data)
-
             const newProduct = await Product.create(data);
-            // await newProduct.populate('username').execPopulate()
+            await newProduct.populate('username')
 
-            return res.status(200).json(newProduct);
+            return res.status(200).send(newProduct);
         } catch (err) {
+            console.log(err)
             return res.status(400).send(err)
         }
     },
     async getUserProducts(req, res) {
+
+        const { user_id } = req.params
+
         try {
+            const productOfAnUser = await Product.find({ username: user_id })
+            return res.status(200).send(productOfAnUser)
             
         } catch (err) {
             return res.status(400).send(err)
