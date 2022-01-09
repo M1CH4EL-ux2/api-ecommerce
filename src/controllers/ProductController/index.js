@@ -11,10 +11,10 @@ const ProductController = {
             const newProduct = await Product.create(data);
             await newProduct.populate('username')
 
-            return res.status(200).send(newProduct);
+            return res.status(200).json(newProduct);
         } catch (err) {
             console.log(err)
-            return res.status(400).send(err)
+            return res.status(400).json(err)
         }
     },
     async getUserProducts(req, res) {
@@ -23,38 +23,48 @@ const ProductController = {
 
         try {
             const productOfAnUser = await Product.find({ username: user_id })
-            return res.status(200).send(productOfAnUser)
+            return res.status(200).json(productOfAnUser)
             
         } catch (err) {
-            return res.status(400).send(err)
+            return res.status(400).json(err)
         }
     },
     async updateProducts(req, res) {
+
+        const bodyData = req.body;
+        const { product_id } = req.params;
+
         try {
+            const updateProduct = await Product.findByIdAndUpdate(product_id, bodyData, { new: true });
             
+            return res.status(200).json(updateProduct);
         } catch (err) {
-            return res.status(400).send(err)
+            return res.status(400).json(err)
         }
     },
     async deleteProduct(req, res) {
+        const { product_id } = req.params;
+
         try {
+            const deleteProduct = await Product.findByIdAndDelete(product_id)
             
+            return res.status(200).json(deleteProduct);
         } catch (err) {
-            return res.status(400).send(err)
+            return res.status(400).json(err)
         }
     },
     async getProducts(req, res) {
         try {
             
         } catch (err) {
-            return res.status(400).send(err)
+            return res.status(400).json(err)
         }
     },
     async getProductsById(req, res) {
         try {
             
         } catch (err) {
-            return res.status(400).send(err)
+            return res.status(400).json(err)
         }
     },
 }
