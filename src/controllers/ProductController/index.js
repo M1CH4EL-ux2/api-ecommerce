@@ -63,8 +63,13 @@ const ProductController = {
         }
     },
     async getProductsById(req, res) {
+        const { product_id } = req.params;
+        
         try {
             
+            const product = await Product.findOne(product_id);
+            return res.status(200).json(product)
+
         } catch (err) {
             return res.status(400).json(err)
         }
