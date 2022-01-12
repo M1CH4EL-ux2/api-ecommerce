@@ -21,7 +21,7 @@ const CartController = {
         const { user_id } = req.params;
         
         try {
-            const userCarts = await Cart.find({username: user_id});
+            const userCarts = await Cart.find({username: user_id}).populate('products');
             return res.status(200).json(userCarts);
 
         } catch (err) {
@@ -33,7 +33,7 @@ const CartController = {
         const { cart_id } = req.params;
 
         try {
-            const carts = await Cart.findById(cart_id);
+            const carts = await Cart.findById(cart_id).populate('products');
             return res.status(200).json(carts);
         } catch (err) {
             return res.status(400).json(err);
